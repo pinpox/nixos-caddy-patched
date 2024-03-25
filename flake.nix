@@ -39,7 +39,7 @@
         in
         {
 
-          caddy = pkgs.buildGo120Module {
+          caddy = pkgs.buildGoModule {
             pname = "caddy";
             inherit version;
             src = ./caddy-src;
