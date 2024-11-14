@@ -58,10 +58,10 @@
               mainProgram = "caddy";
             };
           };
+
+          default = self.packages.${system}.caddy;
         }
       );
-
-      defaultPackage = forAllSystems (system: self.packages.${system}.caddy);
 
       devShells = forAllSystems (
         system:
