@@ -54,6 +54,9 @@
             vendorHash = "sha256-o5s3i+HArqXcmnhmpnnm1qEKmU/UeYii13Qoj5nP39A=";
             # vendorHash = pkgs.lib.fakeSha256;
 
+            meta = {
+              mainProgram = "caddy";
+            };
           };
         }
       );
