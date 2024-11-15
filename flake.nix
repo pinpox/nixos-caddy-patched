@@ -1,9 +1,8 @@
 {
-  description = "A simple Go package";
+  description = "Patched version of Caddy";
 
-  # Nixpkgs / NixOS version to use. 
-  # As of 2024-11-14 we can use 24.05 for Go # 1.22.8
-  inputs.nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
+  # Nixpkgs / NixOS version to use.
+  inputs.nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
   outputs =
     { self, nixpkgs }:
