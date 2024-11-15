@@ -1,11 +1,11 @@
 {
-  description = "A simple Go package";
+  description = "Patched version of Caddy";
 
-  # Nixpkgs / NixOS version to use. 
-  # As of 2023-10-04 we need unstable for Go # 1.20
+  # Nixpkgs / NixOS version to use.
   inputs.nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
-  outputs = { self, nixpkgs }:
+  outputs =
+    { self, nixpkgs }:
     let
 
       # to work with older version of flakes
@@ -15,7 +15,12 @@
       version = builtins.substring 0 8 lastModifiedDate;
 
       # System types to support.
-      supportedSystems = [ "x86_64-linux" "x86_64-darwin" "aarch64-linux" "aarch64-darwin" ];
+      supportedSystems = [
+        "x86_64-linux"
+        "x86_64-darwin"
+        "aarch64-linux"
+        "aarch64-darwin"
+      ];
 
       # Helper function to generate an attrset '{ x86_64-linux = f "x86_64-linux"; ... }'.
       forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
@@ -33,7 +38,8 @@
       # };
 
       # Provide some binary packages for selected system types.
-      packages = forAllSystems (system:
+      packages = forAllSystems (
+        system:
         let
           pkgs = nixpkgsFor.${system};
         in
@@ -47,9 +53,26 @@
             vendorHash = "sha256-o5s3i+HArqXcmnhmpnnm1qEKmU/UeYii13Qoj5nP39A=";
             # vendorHash = pkgs.lib.fakeSha256;
 
+            meta = {
+              mainProgram = "caddy";
+            };
           };
-        });
 
-      defaultPackage = forAllSystems (system: self.packages.${system}.caddy);
+          default = self.packages.${system}.caddy;
+        }
+      );
+
+      devShells = forAllSystems (
+        system:
+        let
+          pkgs = nixpkgsFor.${system};
+        in
+        {
+          default = pkgs.mkShell {
+            buildInputs = with pkgs; [ go ];
+          };
+        }
+      );
+
     };
 }
