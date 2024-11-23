@@ -44,8 +44,8 @@
             inherit version;
             src = ./caddy-src;
             runVend = true;
-            vendorHash = "sha256-o5s3i+HArqXcmnhmpnnm1qEKmU/UeYii13Qoj5nP39A=";
-            # vendorHash = pkgs.lib.fakeSha256;
+            vendorHash = "sha256-c9A0LabGN8gIq2pL/WP8wst3y0+8f72K015QZrX9yq4=";
+            # vendorHash = pkgs.lib.fakeHash;
 
             meta = {
               homepage = "https://caddyserver.com";
