@@ -31,12 +31,6 @@
     in
     {
 
-      # # A Nixpkgs overlay.
-      # overlay = final: prev: {
-      #   go = final.go_1_20;
-      #   buildGoModule = final.buildGo117Module;
-      # };
-
       # Provide some binary packages for selected system types.
       packages = forAllSystems (
         system:
@@ -54,10 +48,17 @@
             # vendorHash = pkgs.lib.fakeSha256;
 
             meta = {
+              homepage = "https://caddyserver.com";
+              description = "Fast and extensible multi-platform HTTP/1-2-3 web server with automatic HTTPS";
+              license = pkgs.lib.licenses.asl20;
               mainProgram = "caddy";
+              maintainers = with pkgs.lib.maintainers; [
+                Br1ght0ne
+                emilylange
+                techknowlogick
+              ];
             };
           };
-
           default = self.packages.${system}.caddy;
         }
       );
