@@ -1,3 +1,10 @@
+# Archived Project
+
+This project is no longer necessary, as nixpkgs now supports `caddy.withPlugins`.
+
+See [NixOS/nixpkgs#358586](https://github.com/NixOS/nixpkgs/pull/358586) for details.
+
+
 # Patched Caddy NixOS flake
 
 Caddy's third-party plugins are installed by adding them as import in
